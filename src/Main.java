@@ -14,7 +14,8 @@ public class Main {
             System.out.println("1. 単語を追加する");
             System.out.println("2. 単語一覧を表示する");
             System.out.println("3. 終了する");
-            System.out.print("選択してください（1〜3）：");
+            System.out.println("4. 単語を検索する");
+            System.out.print("選択してください（1〜4）：");
             
             String choice = scanner.nextLine();
             
@@ -69,11 +70,28 @@ public class Main {
             case "3":
             	System.out.println("単語帳を終了します。お疲れさまでした！");
             	WordStorage.saveWords(wordList);  // 終了時に保存
+            	System.out.println("💾 単語データを保存しました。");
             	scanner.close();
             	return;
             	
+            case "4":
+            	System.out.println("🔍 検索ワードを入力してください：");
+            	String keyword = scanner.nextLine();
+            	boolean found = false;
+                for (Word w : wordList) {
+                    if (w.getTerm().contains(keyword) || w.getMeaning().contains(keyword)) {
+                        System.out.println("✅ " + w.getTerm() + "： " + w.getMeaning());
+                        found = true;
+                    }
+                }
+
+                if (!found) {
+                    System.out.println("❌ 該当する単語が見つかりませんでした。");
+                }
+                break;
+            	
         	default:
-        		System.out.println("⚠ 1〜3の数字を入力してください。");
+        		System.out.println("⚠ 1〜4の数字を入力してください。");
             }
 		}
 	}
