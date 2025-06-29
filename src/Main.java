@@ -4,7 +4,8 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) {
-		ArrayList<Word> wordList = new ArrayList<>(); //単語リスト
+		ArrayList<Word> wordList = WordStorage.loadWords();  // 起動時に読み込み
+        System.out.println("📂 単語データを読み込みました。現在の単語数：" + wordList.size());
 		Scanner scanner = new Scanner(System.in); //入力
 		
 		while (true) {
@@ -67,6 +68,7 @@ public class Main {
             	
             case "3":
             	System.out.println("単語帳を終了します。お疲れさまでした！");
+            	WordStorage.saveWords(wordList);  // 終了時に保存
             	scanner.close();
             	return;
             	
